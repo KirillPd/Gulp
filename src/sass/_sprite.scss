@@ -1,0 +1,151 @@
+/*
+SCSS variables are information about icon's compiled state, stored under its original file name
+
+.icon-home {
+  width: $icon-home-width;
+}
+
+The large array-like variables contain all information about a single icon
+$icon-home: x y offset_x offset_y width height total_width total_height image_path;
+
+At the bottom of this section, we provide information about the spritesheet itself
+$spritesheet: width height image $spritesheet-sprites;
+*/
+$analysis-ic-name: 'analysis-ic';
+$analysis-ic-x: 256px;
+$analysis-ic-y: 87px;
+$analysis-ic-offset-x: -256px;
+$analysis-ic-offset-y: -87px;
+$analysis-ic-width: 75px;
+$analysis-ic-height: 77px;
+$analysis-ic-total-width: 343px;
+$analysis-ic-total-height: 256px;
+$analysis-ic-image: '../images/sprite.png';
+$analysis-ic: (256px, 87px, -256px, -87px, 75px, 77px, 343px, 256px, '../images/sprite.png', 'analysis-ic', );
+$black-arrow-name: 'black-arrow';
+$black-arrow-x: 331px;
+$black-arrow-y: 141px;
+$black-arrow-offset-x: -331px;
+$black-arrow-offset-y: -141px;
+$black-arrow-width: 9px;
+$black-arrow-height: 17px;
+$black-arrow-total-width: 343px;
+$black-arrow-total-height: 256px;
+$black-arrow-image: '../images/sprite.png';
+$black-arrow: (331px, 141px, -331px, -141px, 9px, 17px, 343px, 256px, '../images/sprite.png', 'black-arrow', );
+$bullets-counts-name: 'bullets-counts';
+$bullets-counts-x: 331px;
+$bullets-counts-y: 87px;
+$bullets-counts-offset-x: -331px;
+$bullets-counts-offset-y: -87px;
+$bullets-counts-width: 12px;
+$bullets-counts-height: 54px;
+$bullets-counts-total-width: 343px;
+$bullets-counts-total-height: 256px;
+$bullets-counts-image: '../images/sprite.png';
+$bullets-counts: (331px, 87px, -331px, -87px, 12px, 54px, 343px, 256px, '../images/sprite.png', 'bullets-counts', );
+$email-ic-name: 'email-ic';
+$email-ic-x: 256px;
+$email-ic-y: 164px;
+$email-ic-offset-x: -256px;
+$email-ic-offset-y: -164px;
+$email-ic-width: 35px;
+$email-ic-height: 23px;
+$email-ic-total-width: 343px;
+$email-ic-total-height: 256px;
+$email-ic-image: '../images/sprite.png';
+$email-ic: (256px, 164px, -256px, -164px, 35px, 23px, 343px, 256px, '../images/sprite.png', 'email-ic', );
+$fish-name: 'fish';
+$fish-x: 0px;
+$fish-y: 0px;
+$fish-offset-x: 0px;
+$fish-offset-y: 0px;
+$fish-width: 256px;
+$fish-height: 256px;
+$fish-total-width: 343px;
+$fish-total-height: 256px;
+$fish-image: '../images/sprite.png';
+$fish: (0px, 0px, 0px, 0px, 256px, 256px, 343px, 256px, '../images/sprite.png', 'fish', );
+$visualize-ic-name: 'visualize-ic';
+$visualize-ic-x: 256px;
+$visualize-ic-y: 0px;
+$visualize-ic-offset-x: -256px;
+$visualize-ic-offset-y: 0px;
+$visualize-ic-width: 87px;
+$visualize-ic-height: 87px;
+$visualize-ic-total-width: 343px;
+$visualize-ic-total-height: 256px;
+$visualize-ic-image: '../images/sprite.png';
+$visualize-ic: (256px, 0px, -256px, 0px, 87px, 87px, 343px, 256px, '../images/sprite.png', 'visualize-ic', );
+$spritesheet-width: 343px;
+$spritesheet-height: 256px;
+$spritesheet-image: '../images/sprite.png';
+$spritesheet-sprites: ($analysis-ic, $black-arrow, $bullets-counts, $email-ic, $fish, $visualize-ic, );
+$spritesheet: (343px, 256px, '../images/sprite.png', $spritesheet-sprites, );
+
+/*
+The provided mixins are intended to be used with the array-like variables
+
+.icon-home {
+  @include sprite-width($icon-home);
+}
+
+.icon-email {
+  @include sprite($icon-email);
+}
+
+Example usage in HTML:
+
+`display: block` sprite:
+<div class="icon-home"></div>
+
+To change `display` (e.g. `display: inline-block;`), we suggest using a common CSS class:
+
+// CSS
+.icon {
+  display: inline-block;
+}
+
+// HTML
+<i class="icon icon-home"></i>
+*/
+@mixin sprite-width($sprite) {
+  width: nth($sprite, 5);
+}
+
+@mixin sprite-height($sprite) {
+  height: nth($sprite, 6);
+}
+
+@mixin sprite-position($sprite) {
+  $sprite-offset-x: nth($sprite, 3);
+  $sprite-offset-y: nth($sprite, 4);
+  background-position: $sprite-offset-x  $sprite-offset-y;
+}
+
+@mixin sprite-image($sprite) {
+  $sprite-image: nth($sprite, 9);
+  background-image: url(#{$sprite-image});
+}
+
+@mixin sprite($sprite) {
+  @include sprite-image($sprite);
+  @include sprite-position($sprite);
+  @include sprite-width($sprite);
+  @include sprite-height($sprite);
+}
+
+/*
+The `sprites` mixin generates identical output to the CSS template
+  but can be overridden inside of SCSS
+
+@include sprites($spritesheet-sprites);
+*/
+@mixin sprites($sprites) {
+  @each $sprite in $sprites {
+    $sprite-name: nth($sprite, 10);
+    .#{$sprite-name} {
+      @include sprite($sprite);
+    }
+  }
+}

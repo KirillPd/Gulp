@@ -1,0 +1,33 @@
+{
+  "name": "it-hive-gulp",
+  "version": "1.0.1",
+  "description": "It makes your life easier :)",
+  "author" : "Kirill Poddubnyi <poddubny.kirill@gmail.com>",
+  "maintainers": [
+    {
+      "name": "Kirill Poddubnyi",
+      "email": "poddubny.kirill@gmail.com"
+    }
+  ],
+  "dependencies": {
+    "browser-sync": "^2.11.1",
+    "del": "^2.2.0",
+    "gulp": "gulpjs/gulp#4.0",
+    "gulp-autoprefixer": "^3.1.0",
+    "gulp-concat": "^2.6.0",
+    "gulp-cssnano": "^2.1.1",
+    "gulp-htmlhint": "^0.3.1",
+    "gulp-imagemin": "^2.4.0",
+    "gulp-jshint": "^2.0.0",
+    "gulp-notify": "^2.2.0",
+    "gulp-notify-linter-reporters": "^1.0.3",
+    "gulp-plumber": "^1.1.0",
+    "gulp-processhtml": "^1.1.0",
+    "gulp-sass": "^2.2.0",
+    "gulp-sourcemaps": "^1.6.0",
+    "gulp-uglify": "^1.5.3",
+    "gulp.spritesmith": "^6.2.0",
+    "jshint": "^2.9.1",
+    "merge-stream": "^1.0.0"
+  }
+}

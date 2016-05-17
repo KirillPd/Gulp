@@ -1,0 +1,130 @@
+* {
+	outline: none;
+
+	&:focus {outline: none;}
+}
+
+img {
+	vertical-align: top;
+	border: 0;
+	max-width: 100%;
+	height: auto;
+}
+
+header,
+footer,
+article,
+section,
+hgroup,
+nav,
+figure {
+	display: block;
+}
+
+form,
+fieldset,
+button {
+	margin: 0;
+	padding: 0;
+	border: none;
+}
+
+button {
+	background-color: transparent;
+	-webkit-appearance: none;
+}
+
+input {
+	box-sizing: border-box;
+	border-radius: 0;
+	font: 30px/1.1 $primary-font-family;
+	font-weight: 400;
+	-webkit-appearance: none;
+
+	&[type=text],
+	&[type=tel],
+	&[type=email],
+	&[type=password] {
+		&.error {border-bottom: 1px solid #ec1b35;}
+	}
+
+	&[type="submit"] {
+		border-radius: 0;
+		transition: box-shadow 0.15s ease-in-out;
+
+		&:hover {
+			box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+		}
+	}
+
+	@include placeholder {
+		color: #fff;
+		opacity: 1;
+		text-transform: uppercase;
+	}
+
+	&:focus {
+		@include placeholder {opacity: 0.5;}
+	}
+}
+
+textarea {
+	font: 30px/1.1 $primary-font-family;
+
+	@include placeholder {
+		color: #fff;
+		opacity: 1;
+		text-transform: uppercase;
+	}
+
+	&:focus {
+		border: 1px solid #00adef;
+
+		@include placeholder {opacity: 0.5;}
+	}
+
+	&.error {border-bottom: 1px solid #ec1b35;}
+}
+
+button::-moz-focus-inner,
+input::-moz-focus-inner {
+	outline: none;
+	border: none;
+}
+
+body {
+	margin: 0;
+	overflow-x: hidden;
+	font: 14px/1.429 $primary-font-family;
+	color: yellow;
+	text-size-adjust: 100%;
+	background: purple;
+}
+
+#wrapper {
+	position: relative;
+	height: 100vh;
+}
+
+.hello-holder {
+	position: absolute;
+	top: 50%;
+	left: 0;
+	right: 0;
+	transform: translateY(-50%);
+	background: transparent url('../images/9cb5870b.jpg') 50% 50% no-repeat;
+	background-size: cover;
+
+	p {text-align: center;}
+}
+
+#hello {
+	margin: 0;
+	text-align: center;
+}
+
+.icon {
+	@include sprite($fish);
+
+	display: inline-block;
+}
