@@ -50,12 +50,12 @@ requireTask(cfg.tasksNames.clean, cfg.paths.tasks.clean, {
 
 requireTask(cfg.tasksNames.copy, cfg.paths.tasks.copy, {
 	src: [
-		projectPath,
+		projectPath + '*',
 		"!" + projectPath + cfg.paths.sass.dest,
 		"!" + projectPath + cfg.paths.js.dest,
 		"!" + projectPath + cfg.paths.css.dest,
 		"!" + projectPath + cfg.paths.images.dest,
-		"!" + projectPath + cfg.paths.html.all,
+		"!" + projectPath + cfg.paths.html.all
 	],
 	dest: buildPath
 });
