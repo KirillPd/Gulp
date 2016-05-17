@@ -40,19 +40,17 @@ module.exports = {
 			generateSprite: './tasks/generate-sprite.js'
 		}
 	},
-	tasks: {
-		name: {
-			imgMin: 'img-min',
-			styles: 'styles',
-			jsHint: 'js-hint',
-			htmlHint: 'html-hint',
-			serve: 'serve',
-			clean: 'clean',
-			copy: 'copy',
-			jsCompress: 'js-compress',
-			cssMin: 'css-min',
-			processHtml: 'process-html',
-			generateSprite: 'generate-sprite'
-		}
+	tasksNames: {
+		imgMin: 'img-min',
+		styles: 'styles',
+		jsHint: 'js-hint',
+		htmlHint: 'html-hint',
+		serve: 'serve',
+		clean: 'clean',
+		copy: 'copy',
+		jsCompress: 'js-compress',
+		cssMin: 'css-min',
+		processHtml: 'process-html',
+		generateSprite: 'generate-sprite'
 	}
 };

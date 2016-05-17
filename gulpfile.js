@@ -1,7 +1,9 @@
 'use strict';
 
 const	gulp = require('gulp'),
-		config = require('./config.js');
+		cfg = require('./config.js'),
+		projectPath = cfg.paths.project,
+		buildPath = cfg.paths.build;
 
 function requireTask(taskName, path, options) {
 	options = options || {};
@@ -13,107 +15,107 @@ function requireTask(taskName, path, options) {
 	});
 }
 
-requireTask(config.tasks.name.imgMin, config.paths.tasks.imgMin, {
+requireTask(cfg.tasksNames.imgMin, cfg.paths.tasks.imgMin, {
 	src: [
-		config.paths.project + config.paths.images.all,
-		"!" + config.paths.project + config.paths.images.spriteFolder
+		projectPath + cfg.paths.images.all,
+		"!" + projectPath + cfg.paths.images.spriteFolder
 	],
-	dest: config.paths.build + config.paths.images.dest
+	dest: buildPath + cfg.paths.images.dest
 });
 
-requireTask(config.tasks.name.styles, config.paths.tasks.styles, {
-	src: config.paths.project + config.paths.sass.all,
-	dest: config.paths.project + config.paths.css.dest
+requireTask(cfg.tasksNames.styles, cfg.paths.tasks.styles, {
+	src: projectPath + cfg.paths.sass.all,
+	dest: projectPath + cfg.paths.css.dest
 });
 
-requireTask(config.tasks.name.jsHint, config.paths.tasks.jsHint, {
-	src: config.paths.project + config.paths.js.entry,
+requireTask(cfg.tasksNames.jsHint, cfg.paths.tasks.jsHint, {
+	src: projectPath + cfg.paths.js.entry,
 });
 
-requireTask(config.tasks.name.htmlHint, config.paths.tasks.htmlHint, {
-	src: config.paths.project + config.paths.html.all,
+requireTask(cfg.tasksNames.htmlHint, cfg.paths.tasks.htmlHint, {
+	src: projectPath + cfg.paths.html.all,
 });
 
-requireTask(config.tasks.name.serve, config.paths.tasks.serve, {
-	baseDir: config.paths.project,
+requireTask(cfg.tasksNames.serve, cfg.paths.tasks.serve, {
+	baseDir: projectPath,
 	watchDir: [
-		config.paths.project + config.paths.css.all,
-		config.paths.project + config.paths.html.all
+		projectPath + cfg.paths.css.all,
+		projectPath + cfg.paths.html.all
 	]
 });
 
-requireTask(config.tasks.name.clean, config.paths.tasks.clean, {
-	src: config.paths.build
+requireTask(cfg.tasksNames.clean, cfg.paths.tasks.clean, {
+	src: buildPath
 });
 
-requireTask(config.tasks.name.copy, config.paths.tasks.copy, {
+requireTask(cfg.tasksNames.copy, cfg.paths.tasks.copy, {
 	src: [
-		config.paths.project,
-		"!" + config.paths.project + config.paths.sass.dest,
-		"!" + config.paths.project + config.paths.js.dest,
-		"!" + config.paths.project + config.paths.css.dest,
-		"!" + config.paths.project + config.paths.images.dest,
-		"!" + config.paths.project + config.paths.html.all,
+		projectPath,
+		"!" + projectPath + cfg.paths.sass.dest,
+		"!" + projectPath + cfg.paths.js.dest,
+		"!" + projectPath + cfg.paths.css.dest,
+		"!" + projectPath + cfg.paths.images.dest,
+		"!" + projectPath + cfg.paths.html.all,
 	],
-	dest: config.paths.build
+	dest: buildPath
 });
 
-requireTask(config.tasks.name.jsCompress, config.paths.tasks.jsCompress, {
-	src: config.paths.project + config.paths.js.all,
-	dest: config.paths.build + config.paths.js.dest
+requireTask(cfg.tasksNames.jsCompress, cfg.paths.tasks.jsCompress, {
+	src: projectPath + cfg.paths.js.all,
+	dest: buildPath + cfg.paths.js.dest
 });
 
-requireTask(config.tasks.name.cssMin, config.paths.tasks.cssMin, {
-	src: config.paths.project + config.paths.css.entry,
-	dest: config.paths.build + config.paths.css.dest
+requireTask(cfg.tasksNames.cssMin, cfg.paths.tasks.cssMin, {
+	src: projectPath + cfg.paths.css.entry,
+	dest: buildPath + cfg.paths.css.dest
 });
 
-requireTask(config.tasks.name.processHtml, config.paths.tasks.processHtml, {
-	src: config.paths.project + config.paths.html.all,
-	dest: config.paths.build
+requireTask(cfg.tasksNames.processHtml, cfg.paths.tasks.processHtml, {
+	src: projectPath + cfg.paths.html.all,
+	dest: buildPath
 });
 
-requireTask(config.tasks.name.generateSprite, config.paths.tasks.generateSprite, {
-	src: config.paths.project + config.paths.images.sprite,
-	destImg: config.paths.project + config.paths.images.dest,
-	imgPathForScss: config.paths.images.dest,
-	destScss: config.paths.project + config.paths.sass.dest,
+requireTask(cfg.tasksNames.generateSprite, cfg.paths.tasks.generateSprite, {
+	src: projectPath + cfg.paths.images.sprite,
+	destImg: projectPath + cfg.paths.images.dest,
+	imgPathForScss: cfg.paths.images.dest,
+	destScss: projectPath + cfg.paths.sass.dest,
 	imgName: 'sprite.png',
 	fileName: '_sprite.scss'
 });
 
 gulp.task('watch', function() {
 	gulp.watch(
-		config.paths.project + config.paths.html.all,
-		gulp.series(config.tasks.name.htmlHint)
+		projectPath + cfg.paths.html.all,
+		gulp.series(cfg.tasksNames.htmlHint)
 	);
 	gulp.watch(
-		config.paths.project + config.paths.sass.all,
-		gulp.series(config.tasks.name.styles)
+		projectPath + cfg.paths.sass.all,
+		gulp.series(cfg.tasksNames.styles)
 	);
 	gulp.watch(
-		config.paths.project + config.paths.js.entry,
-		gulp.series(config.tasks.name.jsHint)
+		projectPath + cfg.paths.js.entry,
+		gulp.series(cfg.tasksNames.jsHint)
 	);
 	gulp.watch(
-		config.paths.project + config.paths.images.spriteFolder,
-		gulp.series(config.tasks.name.generateSprite)
+		projectPath + cfg.paths.images.spriteFolder,
+		gulp.series(cfg.tasksNames.generateSprite)
 	);
 });
 
 gulp.task('default',
-	gulp.parallel('watch', config.tasks.name.serve)
+	gulp.parallel('watch', cfg.tasksNames.serve)
 );
 
 gulp.task('build',
 	gulp.series(
-		config.tasks.name.clean,
-		config.tasks.name.copy,
+		cfg.tasksNames.clean,
+		cfg.tasksNames.copy,
 		gulp.parallel(
-			config.tasks.name.jsCompress,
-			config.tasks.name.imgMin,
-			config.tasks.name.cssMin,
-			config.tasks.name.processHtml
+			cfg.tasksNames.jsCompress,
+			cfg.tasksNames.imgMin,
+			cfg.tasksNames.cssMin,
+			cfg.tasksNames.processHtml
 		)
 	)
 );
