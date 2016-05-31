@@ -13,7 +13,8 @@ module.exports = {
 		sass: {
 			dest: 'sass/',
 			entry: 'sass/all.scss',
-			all: 'sass/**.scss'
+			all: 'sass/**.scss',
+			folder: 'sass'
 		},
 		js: {
 			dest: 'js/',
