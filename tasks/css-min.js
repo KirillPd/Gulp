@@ -7,7 +7,14 @@ module.exports = function(options) {
 
 	return function() {
 		return gulp.src(options.src)
-			.pipe(cssnano())
+			.pipe(cssnano({
+				reduceIdents: {
+					keyframes: false
+				},
+				discardUnused: {
+					keyframes: false
+				}
+			}))
 			.pipe(gulp.dest(options.dest));
 	};
 
